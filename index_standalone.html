@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هندسة الاستناد | الدليل الشامل لجدران الاستناد</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+
+        /* Parallax */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Premium White Animated Background */
+        .animated-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            top: -100%;
+            left: -100%;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.05) 0%, transparent 35%),
+                radial-gradient(circle at 50% 50%, rgba(229, 231, 235, 0.4) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(255, 255, 255, 0.8));
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), 0 0 40px rgba(255, 255, 255, 0.3);
+            animation: float-particle 20s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 8px;
+            height: 8px;
+            top: 20%;
+            left: 15%;
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+
+        .particle:nth-child(2) {
+            width: 12px;
+            height: 12px;
+            top: 60%;
+            left: 25%;
+            animation-delay: 3s;
+            animation-duration: 22s;
+        }
+
+        .particle:nth-child(3) {
+            width: 6px;
+            height: 6px;
+            top: 40%;
+            left: 70%;
+            animation-delay: 5s;
+            animation-duration: 28s;
+        }
+
+        .particle:nth-child(4) {
+            width: 10px;
+            height: 10px;
+            top: 75%;
+            left: 60%;
+            animation-delay: 7s;
+            animation-duration: 24s;
+        }
+
+        .particle:nth-child(5) {
+            width: 14px;
+            height: 14px;
+            top: 30%;
+            left: 85%;
+            animation-delay: 2s;
+            animation-duration: 26s;
+        }
+
+        .particle:nth-child(6) {
+            width: 7px;
+            height: 7px;
+            top: 85%;
+            left: 40%;
+            animation-delay: 9s;
+            animation-duration: 23s;
+        }
+
+        @keyframes float-particle {
+            0%, 100% { 
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.6;
+            }
+            25% { 
+                transform: translateY(-100px) translateX(30px) scale(1.2);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateY(-50px) translateX(-20px) scale(0.9);
+                opacity: 0.5;
+            }
+            75% { 
+                transform: translateY(-150px) translateX(10px) scale(1.1);
+                opacity: 0.7;
+            }
+        }
+
+        /* Light Waves */
+        .light-waves {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.02) 0%, transparent 70%);
+            animation: wave-expand 15s ease-out infinite;
+        }
+
+        .wave:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: 30%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .wave:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            top: 50%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+
+        .wave:nth-child(3) {
+            width: 350px;
+            height: 350px;
+            bottom: 30%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes wave-expand {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Abstract Shapes */
+        .abstract-shapes {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .abstract-shape {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(229, 231, 235, 0.1));
+            backdrop-filter: blur(20px);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph-shape 20s ease-in-out infinite;
+        }
+
+        .abstract-shape:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .abstract-shape:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 7s;
+        }
+
+        .abstract-shape:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: 15%;
+            left: 40%;
+            animation-delay: 14s;
+        }
+
+        @keyframes morph-shape {
+            0%, 100% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                transform: rotate(0deg) translateY(0);
+            }
+            25% {
+                border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+                transform: rotate(90deg) translateY(-30px);
+            }
+            50% {
+                border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+                transform: rotate(180deg) translateY(-15px);
+            }
+            75% {
+                border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+                transform: rotate(270deg) translateY(-40px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-50 border-b border-slate-100 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#home" class="font-bold text-2xl text-blue-900 tracking-tight">هندسة<span class="text-blue-600">الاستناد</span></a>
+                <div class="hidden md:flex space-x-8 space-x-reverse">
+                    <a href="#intro" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">المقدمة</a>
+                    <a href="#components" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">مكونات</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="animated-bg"></div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="light-waves">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+        <div class="abstract-shapes">
+            <div class="abstract-shape"></div>
+            <div class="abstract-shape"></div>
+            <div class="abstract-shape"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20 fade-in-up">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 mb-6 leading-tight">
+                خلفية متحركة <br/>
+                <span class="text-amber-600">تجربة بصرية فريدة</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-600 mb-10 font-light fade-in-up delay-100">
+                الدليل الشامل لإنشاء وتصميم خلفيات متحركة احترافية لمواقع الويب والتطبيقات
+            </p>
+            <a href="#intro" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-xl fade-in-up delay-200">
+                اكتشف المزيد
+            </a>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section id="intro" class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">مقدمة</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="prose prose-lg text-slate-600 fade-in-up">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">ما هي جدران الاستناد؟</h3>
+                    <p class="leading-relaxed mb-4">
+                        تُعد جدران الاستناد من أهم العناصر الأساسية في مجال الهندسة المدنية، حيث تُستخدم بشكل واسع في مختلف المشاريع العمرانية، خاصة في المناطق التي تعرف تفاوتًا في مستويات التربة أو وجود منحدرات حادة. وتكمن أهمية هذه المنشآت في قدرتها على دعم التربة ومنعها من الانهيار أو الانزلاق، مما يساهم في حماية الطرق والمباني والمنشآت المختلفة من الأخطار الطبيعية التي قد تنتج عن عدم استقرار الأرض.
+                    </p>
+                    <p class="leading-relaxed">
+                        ويُعرف جدار الاستناد على أنه منشأ هندسي يُبنى خصيصًا لمقاومة الضغط الجانبي للتربة، حيث يعمل على تثبيت الكتل الترابية ومنع حركتها نحو الأسفل، خاصة في المناطق المرتفعة أو المنحدرة. ويُعتبر هذا النوع من الجدران حلًا فعالًا لمشكل انجراف التربة، كما يسمح باستغلال الأراضي بشكل أفضل، خصوصًا في المشاريع التي تتطلب تسوية الأرض أو إنشاء طرق في المناطق الجبلية.
+                    </p>
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-2xl fade-in-up delay-100">
+                    <img src="public/images/wall2.jpg" alt="جدار استنادي حجري" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Components Section -->
+    <section id="components" class="py-24 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">مكونات جدران الاستناد</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold text-white mb-4">هندسة<span class="text-blue-500">الاستناد</span></h2>
+            <p class="mb-6 max-w-md mx-auto">موقع تعليمي يهدف إلى نشر المعرفة الهندسية حول تصميم وتنفيذ الجدران الاستنادية بأسلوب علمي مبسط.</p>
+            <p class="text-sm border-t border-slate-800 pt-8">
+                © 2024 جميع الحقوق محفوظة. تم التصميم بحب للمهندسين.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTopBtn" class="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all z-50 opacity-0 translate-y-10 pointer-events-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Scroll Animations (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // 2. Navbar & Scroll to Top Button
+        const navbar = document.getElementById('navbar');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', () => {
+            // Navbar shadow
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+
+            // Scroll to top button
+            if (window.scrollY > 400) {
+                scrollTopBtn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                scrollTopBtn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                scrollTopBtn.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
